@@ -53,25 +53,28 @@ button{
 document.getElementById("myForm").addEventListener("submit", function(e){
 e.preventDefault();
 
+<script>
+document.getElementById("myForm").addEventListener("submit", function(e){
+e.preventDefault();
+
 fetch("https://script.google.com/macros/s/AKfycbx_WDQU-nOnVML7vqABdR32TBKSO9YFgZvQf82mBTRKceO-UWv75wyTYOzoVvDFccFt/exec", {
 method: "POST",
-headers: { "Content-Type": "application/json" },
+mode: "no-cors",
+headers: {
+  "Content-Type": "application/json"
+},
 body: JSON.stringify({
 name: document.getElementById("name").value,
 detail: document.getElementById("detail").value,
 contact: document.getElementById("contact").value
 })
 })
-.then(res => res.text())
-.then(data => {
+.then(() => {
 alert("ส่งข้อมูลสำเร็จ ✅");
 document.getElementById("myForm").reset();
 })
-.catch(error => {
+.catch(() => {
 alert("เกิดข้อผิดพลาด ❌");
 });
 });
 </script>
-
-</body>
-</html>
