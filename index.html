@@ -1,68 +1,12 @@
-<style>
-body{
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  margin:0;
-}
-.card{
-  background:white;
-  padding:25px;
-  border-radius:15px;
-  width:320px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.3);
-  text-align:center;
-  animation: fadeIn 1s ease-in-out;
-}
-.card h2{
-  margin-bottom:15px;
-}
-input{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border-radius:8px;
-  border:1px solid #ccc;
-}
-button{
-  width:100%;
-  padding:10px;
-  border:none;
-  border-radius:8px;
-  background:#28a745;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-  transition:0.3s;
-}
-button:hover{
-  background:#218838;
-}
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
-}
-</style>
-
-<div class="card">
-  <h2>ส่งข้อมูลเข้าระบบ</h2>
-  <form id="myForm">
-    <input type="text" id="name" placeholder="ชื่อ" required>
-    <input type="text" id="detail" placeholder="รายละเอียด" required>
-    <input type="text" id="contact" placeholder="ติดต่อ" required>
-    <button type="submit">ส่งข้อมูล</button>
-  </form>
-</div>
-
 <script>
 document.getElementById("myForm").addEventListener("submit", function(e){
   e.preventDefault();
 
   fetch("https://script.google.com/macros/s/AKfycbx_WDQU-nOnVML7vqABdR32TBKSO9YFgZvQf82mBTRKceO-UWv75wyTYOzoVvDFccFt/exec", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify({
       name: document.getElementById("name").value,
       detail: document.getElementById("detail").value,
@@ -71,11 +15,12 @@ document.getElementById("myForm").addEventListener("submit", function(e){
   })
   .then(res => res.text())
   .then(data => {
-    alert("ส่งข้อมูลสำเร็จ 🔥");
+    alert("ส่งข้อมูลสำเร็จ ✅");
     document.getElementById("myForm").reset();
   })
   .catch(err => {
     alert("เกิดข้อผิดพลาด ❌");
+    console.log(err);
   });
 });
 </script>
